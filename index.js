@@ -18,5 +18,11 @@ app.use(bodyParser.json());
 // Base route
 app.get('/', function(req, res) {
    
-   res.send("Hello, world!");
+   res.send('Hello, world!');
+});
+
+// Listening to a port
+app.listen(app.get('port'), function() {
+
+   console.log('Node application is running in port ' + app.get('port'));
 });
