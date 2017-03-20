@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 
 // Base route
 app.get('/', function(req, res) {
-   
+
    res.send('Hello, world!');
 });
 
