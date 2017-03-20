@@ -21,15 +21,18 @@ app.use(bodyParser.json());
 
 // Base route
 app.get('/', function(req, res) {
-   
-   res.send('Hello, world!');
+
+  res.send('Hello, world!');
 });
 
 // Connect to MongoDB and create a Crossings Collection
 MongoClient.connect(url, function (err, db) {
+
   if (err) {
+
     console.log('Unable to connect to the mongoDB server. Error:', err);
   } else {
+
     console.log('Connection established to', url);
 
     db.createCollection("crossings", function(err, collection){
@@ -66,5 +69,7 @@ app.get('/crossings', function(req, res) {
 // Listening to a port
 app.listen(app.get('port'), function() {
 
-   console.log('Node application is running in port ' + app.get('port'));
+  console.log('Node application is running in port ' + app.get('port'));
 });
+
+// vim: set ts=2 sw=2 softtabstop=2:
