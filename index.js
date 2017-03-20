@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // Setting up the port
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 8100));
 
 // Starting to use modules
 app.use(cors());
