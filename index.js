@@ -58,7 +58,7 @@ MongoClient.connect(url, function (err, db) {
         cars_collection.find();
       }
       //Close connection
-        db.close();
+      db.close();
     });
   }
 });
