@@ -12,9 +12,19 @@ var connection = require('./models/Db.js');
 var collections = require('./models/Collections.js');
 var crossings = require('./models/Crossings.js');
 
+// include the mongodb module
 var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/borderpass');
+
+// create a server instance
+var serverInstance = new mongo.Server('localhost', 27017, {auto_reconnect: true});
+
+// retrieve a database reference
+var dbref = new mongo.Db('borderpass', serverInstance);
+
+// connect to database server
+dbref.open(function(err, dbref) {
+    // now a connection is established
+});
 
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
@@ -26,34 +36,25 @@ app.use(bodyParser.json());
 // Base route
 app.get('/', function(req, res) {
 
-  db.driver.admin.listDatabases(function(e,dbs){
-      res.json(dbs);
-  });
+  res.send('Hello World');
 });
 
 //Create GET route as a test to GET Crossings data from MongoDB
-/*app.get('/crossings', function(req, res) {
-  //collections.createCrossingsCollection(db);
-  collections.insertCrossingsDocuments(db);
-  var crossingsJson = crossings.getCrossings(db);
-  res.json(crossingsJson);
-});*/
-
-/*app.get('/crossings/add', function(req, res) {
-
-  collections.insertCrossingsDocuments(db);
-});*/
-
-app.get('/collections',function(req,res){
-  db.driver.collectionNames(function(e,names){
-    res.json(names);
-  })
-});
-app.get('/collections/:name',function(req,res){
-  var collection = db.get(req.params.name);
-  collection.find({},{limit:20},function(e,docs){
+app.get('/crossings', function(req, res) {
+  crossings.getAll(dbref, function (docs) {
     res.json(docs);
   })
+});
+
+//Create crossings collection and when done, insert dummy data
+app.get('/crossings/init', function(req, res) {
+  collections.create(dbref, "crossings", function(coll){
+    console.log("created collection : ", coll);
+    collections.addCrossings(dbref, function(result){
+      console.log("inserted into crossings : ", result);
+      res.send("created collection and inserted data !");
+    });
+  });
 });
 
 // Listening to a port
