@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/damsu/borderpass_server#readme",
   "dependencies": {
-    "mongodb": "^2.2.25",
     "body-parser": "^1.17.1",
     "cors": "^2.8.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongodb": "^2.2.25",
+    "monk": "^4.0.0"
   }
 }
