@@ -4,3 +4,9 @@ node_modules/
 # vim files
 *.swp
 *~
+
+# git merging files
+*.orig
+
+# unnecessary bash script files
+*.sh
