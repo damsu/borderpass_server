@@ -11,6 +11,8 @@ var assert = require('assert');
 var connection = require('./models/Db.js');
 var collections = require('./models/Collections.js');
 var crossings = require('./models/Crossings.js');
+var routes = require('./routes');
+var collroute = require('./routes/collections.js');
 
 var mongo = require('mongodb');
 var monk = require('monk');
@@ -24,12 +26,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Base route
-app.get('/', function(req, res) {
+app.get('/', routes.index);
 
-  db.driver.admin.listDatabases(function(e,dbs){
-      res.json(dbs);
-  });
-});
+app.get('/cross/:loc', routes.cross);
+app.get('/collections/', collroute.list);
+app.get('/collections/:name', collroute.find);
 
 //Create GET route as a test to GET Crossings data from MongoDB
 /*app.get('/crossings', function(req, res) {
@@ -44,6 +45,7 @@ app.get('/', function(req, res) {
   collections.insertCrossingsDocuments(db);
 });*/
 
+/*
 app.get('/collections',function(req,res){
   db.driver.collectionNames(function(e,names){
     res.json(names);
@@ -55,6 +57,7 @@ app.get('/collections/:name',function(req,res){
     res.json(docs);
   })
 });
+*/
 
 // Listening to a port
 app.listen(app.get('port'), function() {
