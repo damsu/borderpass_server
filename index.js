@@ -26,7 +26,7 @@ var app = express();
 // include the mongodb module
 var mongo = require('mongodb');
 
-//try {
+try {
 
   // create a server instance
   var serverInstance = new mongo.Server('localhost', 27017, {auto_reconnect: true});
@@ -40,11 +40,11 @@ var mongo = require('mongodb');
     console.log('MongoDB succesfully connected!');
     // now a connection is established
   });
-//}
-//catch(err) {
+}
+catch(err) {
 
-//  console.log('There was an error when trying to start mongoDB!\nERROR: ' + err);
-//}
+  console.log('There was an error when trying to start mongoDB!\nERROR: ' + err);
+}
 
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
@@ -55,6 +55,10 @@ app.use(bodyParser.json());
 
 // Base route
 app.get('/', rt_main.index);
+
+// OK, this shit actually works!
+app.get('/test1', rt_main.test.test1);
+app.get('/test2', rt_main.test.test2);
 
 //app.get('/cross/:loc', rt_main.cross);
 //app.get('/collections', rt_collec.list);
