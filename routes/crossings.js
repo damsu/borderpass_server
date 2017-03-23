@@ -5,10 +5,13 @@
 var collections = require('../models/Collections.js');
 var crossings = require('../models/Crossings.js');
 var mongo = require('mongodb');
+var MONGO_URL = (process.env.PROD_MONGODB) ? process.env.PROD_MONGODB : 'localhost';
+
 try {
 
   // create a server instance
-  var serverInstance = new mongo.Server('localhost', 27017, {auto_reconnect: true});
+  var serverInstance = new mongo.Server(MONGO_URL, 27017, {auto_reconnect: true});
+  console.log('Using mongoDB in the following url: ' + MONGO_URL);;
 
   // retrieve a database reference
   var dbref = new mongo.Db('borderpass', serverInstance);
