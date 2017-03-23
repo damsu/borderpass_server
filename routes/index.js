@@ -10,6 +10,7 @@ exports.index = function(req, res) {
 };
 
 exports.test = {
+  
   test1: function(req, res) {
     
     res.send('This is the route for test1!');

@@ -8,7 +8,6 @@
 var express = require('express');
 var cors = require('cors');
 var bodyParser = require('body-parser');
-var assert = require('assert');
 
 // Model Imports
 var connection = require('./models/Db.js');
@@ -23,29 +22,6 @@ var rt_cross = require('./routes/crossings.js');
 // Creating the express instance
 var app = express();
 
-// include the mongodb module
-var mongo = require('mongodb');
-
-try {
-
-  // create a server instance
-  var serverInstance = new mongo.Server('localhost', 27017, {auto_reconnect: true});
-
-  // retrieve a database reference
-  var dbref = new mongo.Db('borderpass', serverInstance);
-
-  // connect to database server
-  dbref.open(function(err, dbref) {
-    
-    console.log('MongoDB succesfully connected!');
-    // now a connection is established
-  });
-}
-catch(err) {
-
-  console.log('There was an error when trying to start mongoDB!\nERROR: ' + err);
-}
-
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
 
@@ -57,6 +33,7 @@ app.use(bodyParser.json());
 app.get('/', rt_main.index);
 
 // OK, this shit actually works!
+//app.get('/test', rt_main.test);
 app.get('/test1', rt_main.test.test1);
 app.get('/test2', rt_main.test.test2);
 

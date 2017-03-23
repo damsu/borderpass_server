@@ -36,7 +36,6 @@ exports.find = function(req, res) {
 
 exports.init = function(req, res) {
 
-  
   collections.create(dbref, "crossings", function(coll) {
 
     console.log("created collection : ", coll);
