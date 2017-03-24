@@ -5,7 +5,7 @@
 var collections = require('../models/Collections.js');
 var crossings = require('../models/Crossings.js');
 var mongo = require('mongodb').MongoClient;
-var MONGO_URL = (process.env.MONGO_URI) ? process.env.MONGO_URI : 'mongodb://localhost:27017/borderpass';
+var MONGO_URL = (process.env.MONGODB_URI) ? process.env.MONGODB_URI : 'mongodb://localhost:27017/borderpass';
 var dbref;
 
 try {
