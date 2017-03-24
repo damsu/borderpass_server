@@ -1,7 +1,26 @@
+var collections = require('../models/Collections.js');
+var crossings = require('../models/Crossings.js');
+var mongo = require('mongodb');
 /* vim: set ts=2 sw=2 softtabstop=2:
 
    Routes for collections.
 */
+try {
+
+  // create a server instance
+  var serverInstance = new mongo.Server('mongodb://damien:passpass@ds141450.mlab.com', 41450);
+  //console.log('Using mongoDB in the following url: ' + MONGO_URL);;
+
+  // retrieve a database reference
+  var dbref = new mongo.Db('borderpass', serverInstance);
+
+  // connect to database server
+  dbref.open();
+}
+catch(err) {
+
+  console.log('There was an error when trying to start mongoDB!\nERROR: ' + err);
+}
 // testing object array
 var collection = [
 
