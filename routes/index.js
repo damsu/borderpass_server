@@ -5,7 +5,7 @@
 var http = require('http');
 var fs = require('fs');
 
-/*/
+//*/
 exports.index = function(req, res) {
 
   console.log('root route accessed.');
