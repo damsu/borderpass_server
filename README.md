@@ -9,7 +9,7 @@
 * [Routing](#routing)
 * [Adding more routes](#adding-more-routes)
   * [index.js](#indexjs)
-  * [routes/foo.js](#routes/foojs)
+  * [routes/foo.js](#routesfoojs)
 
 # About  
 This is a group project for the software development course.
@@ -20,10 +20,9 @@ The server routing would go as follows:
 | type | route | sent data | return |
 | :-- | :-- | :-- | :-- | :-- |
 | GET | /borders | n/a | list of crossing points |
-| GET | /reservations/search/:id | [{reservationNo} or {passportNo}] | reservation data by reservation or passport number |
-| POST | /reservations/add | {reservation form} | add the users reservation to the database |
-| DELETE | /admin/reservations/:id | {reservationID} | remove a reservation based on the reservation ID in the DB |
-
+| GET | /reservations/search/:id | **reservationNo** or **passportNo** | reservation data by reservation or passport number |
+| POST | /reservations/add | **reservation_form** | add the users reservation to the database |
+| DELETE | /admin/reservations/:id | **reservationID** | remove a reservation based on the reservation ID in the DB |
 
 Some restrictions to specific routes
 
@@ -55,7 +54,7 @@ app.post('/foo', rt_foo.post.foo);
 app.post('/foo/:bar', rt_foo.post.bar);
 ```
 
-### route/foo.js
+### routes/foo.js
 ```javascript
 // GET routes
 exports.foo = function(req, res) {
