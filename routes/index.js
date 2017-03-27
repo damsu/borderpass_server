@@ -2,12 +2,27 @@
   
   Main routes-file for handling the generic routes.
 */
+var http = require('http');
+var fs = require('fs');
 
+/*/
 exports.index = function(req, res) {
 
   console.log('root route accessed.');
   res.send('Hello, world!');
 };
+/*/
+exports.index = {
+  
+  hostname: 'localhost',
+  port: app.get('port'),
+  path: '/',
+  agent: false
+}, (res) => {
+
+  res.sendStatus(200);
+}
+//*/
 
 exports.test = {
   

@@ -5,9 +5,9 @@
    Created for Software Development Project 2
 */
 // Node module imports
-var express = require('express');
-var cors = require('cors');
-var bodyParser = require('body-parser');
+const express = require('express');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 // Model Imports
 var connection = require('./models/Db.js');
@@ -20,7 +20,7 @@ var rt_collec = require('./routes/collections.js');
 var rt_cross = require('./routes/crossings.js');
 
 // Creating the express instance
-var app = express();
+const app = express();
 
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
@@ -48,4 +48,3 @@ app.listen(app.get('port'), function() {
 
   console.log('Node application is running in port ' + app.get('port'));
 });
-
