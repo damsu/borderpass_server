@@ -5,11 +5,11 @@
 
 # TOC
 
-* [About](#About)
-* [Routing](#Routing)
-* [Adding more routes](#Adding more routes)
- * [index.js](#index.js)
- * [routes/foo.js](#routes/foo.js)
+* [About](#about)
+* [Routing](#routing)
+* [Adding more routes](#adding-more-routes)
+  * [index.js](#indexjs)
+  * [routes/foo.js](#routes/foojs)
 
 # About  
 This is a group project for the software development course.
