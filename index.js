@@ -7,7 +7,7 @@
 // Node module imports
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 
 // Model Imports
 var connection = require('./models/Db.js');
@@ -20,7 +20,7 @@ var rt_collec = require('./routes/collections.js');
 var rt_cross = require('./routes/crossings.js');
 
 // Creating the express instance
-const app = express();
+var app = express();
 
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));

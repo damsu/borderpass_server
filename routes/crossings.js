@@ -26,12 +26,8 @@ try {
       console.log(err);
       process.exit(1);
     }
-
-    if (server) {
-      
-      dbref = db;
-      console.log('MongoDB initalized succesfully!')
-    }
+    
+    dbref = db;
   });
   //*/
   console.log('Using mongoDB in the following url: ' + MONGO_URL);;
