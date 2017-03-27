@@ -18,7 +18,7 @@ This is a group project for the software development course.
 The server routing would go as follows:
 
 | type | route | sent data | return |
-| :-- | :-- | :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | GET | /borders | n/a | list of crossing points |
 | GET | /reservations/search/:id | **reservationNo** or **passportNo** | reservation data by reservation or passport number |
 | POST | /reservations/add | **reservation_form** | add the users reservation to the database |
