@@ -5,8 +5,10 @@
 var collections = require('../models/Collections.js');
 var crossings = require('../models/Crossings.js');
 var mongo = require('mongodb').MongoClient;
+var ObjectId = require('mongodb').ObjectId;
 var MONGO_URL = (process.env.MONGODB_URI) ? process.env.MONGODB_URI : 'mongodb://localhost:27017/borderpass';
 var dbref;
+
 
 try {
 
@@ -14,6 +16,7 @@ try {
   console.log('Trying to start server in address ' + MONGO_URL);
   /*/
   var serverInstance = new mongo.Server(MONGO_URL, 27017, {auto_reconnect: true});
+>>>>>>> f0473dc9ea8c302174c90b6a6593314c3e1cc452
 
   // retrieve a database reference
   var dbref = new mongo.Db('borderpass', serverInstance);
@@ -44,6 +47,31 @@ exports.all = function(req, res) {
   crossings.getAll(dbref, function(docs) {
 
     res.json(docs);
+  });
+};
+
+// GET route for getting one crossing document.
+exports.one = function(req, res) {
+  var id = new ObjectId(req.params.id);
+  crossings.getOne(dbref, id, function(doc) {
+    res.json(doc);
+  });
+};
+
+// GET route for getting one crossing document.
+exports.delete = function(req, res) {
+  var id = new ObjectId(req.params.id);
+  crossings.deleteOne(dbref, id, function(result) {
+    res.send("Successfully deleted this crossing");
+  });
+};
+
+// POST route for adding a crossing
+exports.add = function(req, res) {
+  
+  crossings.addCrossing(dbref, req.body, function(result) {
+
+    res.send("Sucessfully added a crossing");
   });
 };
 
