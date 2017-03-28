@@ -3,13 +3,14 @@
 
 ---
 
-# TOC
+# Table of Contents
 
 * [About](#about)
 * [Routing](#routing)
 * [Adding more routes](#adding-more-routes)
   * [index.js](#indexjs)
   * [routes/foo.js](#routesfoojs)
+* [Database connection](#database-connection)
 
 # About  
 This is a group project for the software development course.
@@ -45,6 +46,7 @@ var rt_foo = require('routes/foo.js');
 ...
 
 ...
+// Using the new routes.
 // GET routes
 app.get('/foo', rt_foo.foo);
 app.get('/foo/:bar', rt_foo.bar);
@@ -86,3 +88,8 @@ exports.post = {
 }
 // -----------
 ```
+
+# Database connection
+The mongoDB connection is initialized in the **index.js** file and the db element is put into expressjs [locals](http://expressjs.com/en/4x/api.html#res.locals).  
+This can be called in a different export/route using ```
+res.app.locals.db ```.
