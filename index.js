@@ -56,9 +56,9 @@ app.get('/test2', rt_main.test.test2(varbar));
 //app.get('/cross/:loc', rt_main.cross);
 //app.get('/collections', rt_collec.list);
 //app.get('/collections/:name', rt_collec.find);
-app.get('/crossings', rt_cross.all);
-app.get('/crossings/:id', rt_cross.one);
-app.delete('/crossings/:id', rt_cross.delete);
+app.get('/borders', rt_cross.all);
+app.get('/borders/:id', rt_cross.one);
+app.delete('/borders/:id', rt_cross.delete);
 app.get('/init', rt_cross.init);
 app.post('/crossings', rt_cross.add)
 
