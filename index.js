@@ -7,10 +7,12 @@
 // Node module imports
 const express = require('express');
 const cors = require('cors');
+const MONGO_URL = (process.env.MONGODB_URI) ? process.env.MONGODB_URI : 'mongodb://localhost:27017/borderpass';
 var bodyParser = require('body-parser');
+var mongo = require('mongodb').MongoClient;
 
 // Model Imports
-var connection = require('./models/Db.js');
+var db = require('./models/Db.js');
 var collections = require('./models/Collections.js');
 var crossings = require('./models/Crossings.js');
 
@@ -21,6 +23,21 @@ var rt_cross = require('./routes/crossings.js');
 
 // Creating the express instance
 var app = express();
+
+// Creating the database connection
+mongo.connect(MONGO_URL, function(err, db) {  
+  
+  if (err) {
+      
+    console.log(err);
+    process.exit(1);
+  }
+  app.locals.db = db;
+});
+
+// Testing variables.
+var varfoo = 'foo';
+var varbar = 'bar';
 
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
@@ -34,8 +51,8 @@ app.get('/', rt_main.index);
 
 // OK, this shit actually works!
 //app.get('/test', rt_main.test);
-app.get('/test1', rt_main.test.test1);
-app.get('/test2', rt_main.test.test2);
+app.get('/test1', rt_main.test.test1(varfoo));
+app.get('/test2', rt_main.test.test2(varbar));
 
 //app.get('/cross/:loc', rt_main.cross);
 //app.get('/collections', rt_collec.list);

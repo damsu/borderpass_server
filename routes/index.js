@@ -26,13 +26,19 @@ exports.index = {
 
 exports.test = {
   
-  test1: function(req, res) {
+  test1: function(n) {
     
-    res.send('This is the route for test1!');
+    return function(req, res) {
+    
+      res.send('This is the route for test1!\nvariable: ' + n);
+    }
   },
-  test2: function(req, res) {
-    
-    res.send('Here is a second route: test2!');
+  test2: function(n) {
+
+    return function(req, res) {
+      
+      res.send('Here is a second route: test2!\nvariable:' + n);
+    }
   }
 }
 
