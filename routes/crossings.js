@@ -4,6 +4,7 @@
 */
 var collections = require('../models/Collections.js');
 var crossings = require('../models/Crossings.js');
+var ObjectId = require('mongodb').ObjectId;
 
 // GET route for getting all the data from the table.
 exports.all = function(req, res) {
