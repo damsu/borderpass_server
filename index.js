@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
 
 // Model Imports
-var db = require('./models/Db.js');
 var collections = require('./models/Collections.js');
 var crossings = require('./models/Crossings.js');
 
