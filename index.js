@@ -53,6 +53,8 @@ app.get('/', rt_main.index);
 app.get('/test1', rt_main.test.test1(varfoo));
 app.get('/test2', rt_main.test.test2(varbar));
 
+app.post('/test1', rt_main.test.post.test1);
+
 //app.get('/cross/:loc', rt_main.cross);
 //app.get('/collections', rt_collec.list);
 //app.get('/collections/:name', rt_collec.find);

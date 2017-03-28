@@ -39,6 +39,14 @@ exports.test = {
       
       res.send('Here is a second route: test2!\nvariable:' + n);
     }
+  },
+  post: {
+  
+    test1: function(req, res) {
+    
+      console.log('Post request got');
+      res.sendStatus(200);
+    }
   }
 }
 
