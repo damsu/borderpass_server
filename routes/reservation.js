@@ -44,21 +44,20 @@ exports.dummy = function(req, res) {
 exports.get = function(req, res) {
 
 	var type = req.params.type;
-	var data = req.params.id;
-	console.log("Case type: " + type);
+	var data = req.params.data;
 
 	switch (type) {
 	
 		case 'docNum':
 
-			database.findAll(res.app.locals.db, 'reservations', {DocumentNumber: data}, function(result) {
+			database.findAll(res.app.locals.db, 'reservations', {"traveller.DocumentNumber" : data}, function(result) {
 			
 				res.send(result);
 			});
 			break;
 		case 'id':
 
-			var id = new ObjectId(req.params.id);
+			var id = new ObjectId(data);
 			database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
 				
 				res.send(result);
