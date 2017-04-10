@@ -6,6 +6,7 @@ var collections = require('../models/Collections.js');
 var database = require('../models/Database.js');
 var reservation = require('../models/Reservation.js');
 var crossings = require('../models/Crossings.js');
+var ObjectId = require('mongodb').ObjectId;
 
 exports.add = function(req, res) {
 
@@ -43,17 +44,25 @@ exports.dummy = function(req, res) {
 exports.get = function(req, res) {
 
 	var type = req.params.type;
-	var id = req.params.id;
+	var data = req.params.id;
+	var id = new ObjectId(req.params.id);
+	console.log("Case type: " + type);
 
 	switch (type) {
 	
 		case 'passport':
 
+			database.findAll(res.app.locals.db, 'reservations', {passport: data}, function(result) {
 			
+				res.send(result);
+			});
 			break;
 		case 'reservation':
 
-			
+			database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
+				
+				res.send(result);
+			});
 			break;
 		default:
 
@@ -61,7 +70,7 @@ exports.get = function(req, res) {
 			break;
 	}
 }
-exports.post = function(req, res) {
+exports.postAdd = function(req, res) {
 	
 	console.log('got POST request!');
 	console.log('POST data: ' + JSON.stringify(req.body));

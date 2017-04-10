@@ -28,11 +28,43 @@ exports.getAll = function(db, coll, callback) {
 }
 exports.postData = function(db, coll, data, callback) {
 
-	db.collection(coll, function(err, collref) {
+	db.collection(coll, function(err, collection) {
 
-		collref.insert(data, function(err, result) {
+		collection.insert(data, function(err, result) {
 		
 			(err) ? callback(err) : callback(result);
 		});
+	});
+}
+exports.findAll = function(db, coll, data, callback) {
+
+	db.collection(coll, function(err, collection) {
+		
+		collection.find(data).toArray(function(err, result) {
+		
+			if (err) {
+			
+				throw err;
+			} else {
+			
+				callback(result);
+			}
+		})
+	});
+}
+exports.findOne = function(db, coll, data, callback) {
+
+	db.collection(coll, function(err, collection) {
+		
+		collection.findOne(data, function(err, result) {
+		
+			if (err) {
+			
+				throw err;
+			} else {
+			
+				callback(result);
+			}
+		})
 	});
 }
