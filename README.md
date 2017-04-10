@@ -13,23 +13,51 @@
 * [Database connection](#database-connection)
 
 # About  
-This is a group project for the software development course.
+This is a group project for the software development course. The aim was to create a mobile platform to make the border crossing faster and a less of an hassle to begin with.
 
 # Routing
 The server routing would go as follows:
 
-| type | route | sent data | return |
-| :-- | :-- | :-- | :-- |
-| GET | /borders | n/a | list of crossing points |
-| GET | /reservations/search/:id | **reservationNo** or **passportNo** | reservation data by reservation or passport number |
-| POST | /reservations/add | **reservation_form** | add the users reservation to the database |
-| DELETE | /admin/reservations/:id | **reservationID** | remove a reservation based on the reservation ID in the DB |
+| type | route | sent data |
+| :-- | :-- | :-- |
+| GET | /borders | n/a |
+
+**Returns:** Every border crossing saved to the database.
+
+---
+
+| type | route | sent data |
+| :-- | :-- | :-- |
+| GET | /reservations/:type/:data | **type**: what document look for, **data**: data on the field |
+
+**Returns:** All the matching data from the query. (404 if type is undefined)
+
+---
+
+| type | route | sent data |
+| :-- | :-- | :-- |
+| POST | /reservations/ | **reservation_form** |
+
+**Returns:** The ObjectId of the inserted data.
+
+---
+
+| type | route | sent data |
+| :-- | :-- | :-- |
+| DELETE | reservations/:id | **reservationID** |
+
+**Returns:** Status 200  
+*TODO:* Make this work only for the person who had put the reservation in in the first place...
+
+---
 
 Some restrictions to specific routes
 
 | route | restriction |
 | :-- | :-- |
 | /admin/.* | Only system administrators can access this route and its subroutes. |
+
+*NOTE:* This is more or less depcreated.
 
 # Adding more routes
 Creating more routes for the server requires two parts:   
