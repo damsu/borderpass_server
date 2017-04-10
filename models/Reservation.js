@@ -7,10 +7,8 @@ const Q = require('q');
 var deferred = Q.defer();
 
 var dummyData = [
-  {data1: "[1]data1", data2: "[1]data2"},
-  {data1: "[2]data1", data2: "[2]data2"},
-  {data1: "[3]data1", data2: "[3]data2"},
-  {data1: "[4]data1", data2: "[4]data2"}
+	{Name: "Test", Surname: "Buster", Address: "Nanitee", DocumentNumber:"123456789"},
+	{Name: "Test", Surname: "Buster", Address: "Nanitama", DocumentNumber:"123456789"}
 ];
 
 exports.addDummyData = function(dbref, callback) {

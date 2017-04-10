@@ -49,9 +49,9 @@ exports.get = function(req, res) {
 
 	switch (type) {
 	
-		case 'passport':
+		case 'docNum':
 
-			database.findAll(res.app.locals.db, 'reservations', {passport: data}, function(result) {
+			database.findAll(res.app.locals.db, 'reservations', {DocumentNumber: data}, function(result) {
 			
 				res.send(result);
 			});
