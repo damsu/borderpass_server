@@ -45,7 +45,6 @@ exports.get = function(req, res) {
 
 	var type = req.params.type;
 	var data = req.params.id;
-	var id = new ObjectId(req.params.id);
 	console.log("Case type: " + type);
 
 	switch (type) {
@@ -57,8 +56,9 @@ exports.get = function(req, res) {
 				res.send(result);
 			});
 			break;
-		case 'reservation':
+		case 'id':
 
+			var id = new ObjectId(req.params.id);
 			database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
 				
 				res.send(result);
