@@ -7,6 +7,7 @@
 // Node module imports
 const express = require('express');
 const cors = require('cors');
+const Q = require('q');
 const MONGO_URL = (process.env.MONGODB_URI) ? process.env.MONGODB_URI : 'mongodb://localhost:27017/borderpass';
 var bodyParser = require('body-parser');
 var mongo = require('mongodb').MongoClient;
@@ -16,9 +17,10 @@ var collections = require('./models/Collections.js');
 var crossings = require('./models/Crossings.js');
 
 // Route Imports
-var rt_main = require('./routes');
-var rt_collec = require('./routes/collections.js');
-var rt_cross = require('./routes/crossings.js');
+const rt_main = require('./routes');
+const rt_collec = require('./routes/collections.js');
+const rt_cross = require('./routes/crossings.js');
+const rt_reserve = require('./routes/reservation.js');
 
 // Creating the express instance
 var app = express();
@@ -63,6 +65,13 @@ app.get('/borders/:id', rt_cross.one);
 app.delete('/borders/:id', rt_cross.delete);
 app.get('/init', rt_cross.init);
 app.post('/crossings', rt_cross.add)
+
+// Reservation routes.
+app.get('/reservations/init', rt_reserve.init);
+app.get('/reservations/dummy', rt_reserve.dummy);
+app.get('/reservations', rt_reserve.all);
+app.get('/reservations/get/:type/:id', rt_reserve.get);
+app.post('/reservations', rt_reserve.post);
 
 // Listening to a port
 app.listen(app.get('port'), function() {
