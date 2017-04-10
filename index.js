@@ -71,6 +71,7 @@ app.get('/reservations/init', rt_reserve.init);
 app.get('/reservations/dummy', rt_reserve.dummy);
 app.get('/reservations', rt_reserve.all);
 app.get('/reservations/:type/:id', rt_reserve.get);
+app.delete('/reservations/:id', rt_reserve.delete);
 app.post('/reservations', rt_reserve.postAdd);
 
 // Listening to a port

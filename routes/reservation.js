@@ -86,3 +86,19 @@ exports.postAdd = function(req, res) {
 		}
 	});
 }
+exports.delete = function(req, res) {
+
+	//TODO:	Add the removal of the reservation
+	//			Yo mang.
+	var id = new ObjectId(req.params.id);
+	database.remove(res.app.locals.db, 'reservations', {_id: id}, function(result) {
+		
+		if (result.result.n === 1) {
+		
+			res.sendStatus(200);
+		} else {
+		
+			res.send("nothing changed");
+		}
+	})
+}
