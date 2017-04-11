@@ -55,6 +55,7 @@ exports.dummy = function(req, res) {
     res.sendStatus(200);
   });
 }
+/*
 exports.get = function(req, res) {
 
 	var type = req.params.type;
@@ -83,6 +84,28 @@ exports.get = function(req, res) {
 			break;
 	}
 }
+*/
+exports.get = {
+
+	doc : function(req, res) {
+	
+		var data = JSON.parse(req.params.data);
+		console.log("[get.doc]: got information: " + data.doc);
+		database.findAll(res.app.locals.db, 'reservations', {"traveller.Document":data.doc}, function(result) {
+			
+			res.send(result);
+		});
+	},
+	id : function(req, res) {
+	
+		var data = req.params.data;
+		var id = new ObjectId(data);
+		database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
+				
+			res.send(result);
+		});
+	}
+}
 exports.postAdd = function(req, res) {
 	
 	//console.log('got POST request!');
@@ -92,7 +115,7 @@ exports.postAdd = function(req, res) {
 	var done = false;
 	do {
 	
-		newId = new ObjectId(new Buffer(randHex().toString()));
+		newId = new ObjectId(randHex().toString());
 		database.findOne(res.app.locals.db, 'reservations', {_id: newId}, function(result) {
 
 			if (result == null) {
@@ -104,10 +127,14 @@ exports.postAdd = function(req, res) {
 			}
 		});
 	} while (done === true);
+
+	console.log("[postAdd]: newId " + newId);
 	
-	var data = req.body;
-	var inputdata = {_id: newId, data};
-	database.postData(res.app.locals.db, 'reservations', inputdata, function(result) {
+	var crossing = req.body.crossing;
+	var traveller = req.body.traveller;
+	var vehicle = req.body.vehicle
+	
+	database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
 	
 		if (result.ops[0]._id) {
 
