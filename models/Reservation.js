@@ -3,8 +3,6 @@
    Model for adding Reservations.
 */
 // Creating the collection
-const Q = require('q');
-var deferred = Q.defer();
 
 var dummyData = [
 	{	crossing: {note: "THIS IS DUMMY DATA"},

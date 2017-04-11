@@ -2,6 +2,8 @@
 
 	model file for all the database modifying related stuff.
 */
+var counter = 0;
+
 exports.create = function(db, coll, callback) {
 	db.createCollection(coll, function(err, collection) {
 
@@ -25,9 +27,10 @@ exports.getAll = function(db, coll, callback) {
 }
 exports.postData = function(db, coll, data, callback) {
 	db.collection(coll, function(err, collection) {
+
 		collection.insert(data, function(err, result) {
-		
-			(err) ? callback(err) : callback(result); // A special snowflake
+
+			(err) ? callback(err) : callback(result);
 		});
 	});
 }

@@ -8,6 +8,18 @@ var reservation = require('../models/Reservation.js');
 var crossings = require('../models/Crossings.js');
 var ObjectId = require('mongodb').ObjectId;
 
+var pad = function(number, size) {
+
+	var s = "00000000000" + number;
+	return s.substr(s.length - size);
+}
+var randHex = function() {
+
+	var randHex = Math.floor(Math.random() * 16777215).toString(16) + Math.floor(Math.random() * 16777215).toString(16);
+	//console.log("[randHex]: " + randHex);
+	return pad(randHex, 12);
+}
+
 exports.add = function(req, res) {
 
   // TODO: make this function add the reservations in here.
@@ -74,10 +86,26 @@ exports.postAdd = function(req, res) {
 	console.log('got POST request!');
 	console.log('POST data: ' + JSON.stringify(req.body));
 
-	database.postData(res.app.locals.db, 'reservations', req.body, function(result) {
+	var newId;
+	var done = false;
+	do {
+	
+		newId = new ObjectId(new Buffer(randHex().toString()));
+		database.findOne(res.app.locals.db, 'reservations', {_id: newId}, function(result) {
+
+			if (result == null) {
+
+				done = true;
+			}
+		});
+	} while (done === true);
+	
+	var data = req.body;
+	var inputdata = {_id: newId, data};
+	database.postData(res.app.locals.db, 'reservations', inputdata, function(result) {
 	
 		if (result.ops[0]._id) {
-		
+
 			res.send(result.ops[0]._id);
 		} else {
 			
