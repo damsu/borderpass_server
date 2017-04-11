@@ -15,7 +15,9 @@ var pad = function(number, size) {
 }
 var randHex = function() {
 
-	var randHex = Math.floor(Math.random() * 16777215).toString(16) + Math.floor(Math.random() * 16777215).toString(16);
+	var d = (new Date).getTime() % 86400000;
+	var randHex = Math.floor(Math.random() * d).toString(16) + Math.floor(Math.random() * 16777216).toString(16);
+	//console.log("[randHex]: " + d.toString(16));
 	//console.log("[randHex]: " + randHex);
 	return pad(randHex, 12);
 }
@@ -83,8 +85,8 @@ exports.get = function(req, res) {
 }
 exports.postAdd = function(req, res) {
 	
-	console.log('got POST request!');
-	console.log('POST data: ' + JSON.stringify(req.body));
+	//console.log('got POST request!');
+	//console.log('POST data: ' + JSON.stringify(req.body));
 
 	var newId;
 	var done = false;
@@ -96,6 +98,9 @@ exports.postAdd = function(req, res) {
 			if (result == null) {
 
 				done = true;
+			} else {
+			
+				console.log("[postAdd]: Found a collision! Redoing.");
 			}
 		});
 	} while (done === true);
