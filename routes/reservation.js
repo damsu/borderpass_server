@@ -89,9 +89,10 @@ exports.get = {
 		if (req.body.DocumentNumber && req.body.Document && req.body.Citizenship) {
 
 			database.findAll(res.app.locals.db, 'reservations', {
-				$and:[{	"traveller.DocumentNumber" : req.body.DocumentNumber.toString(),
+				$and:[{
+								"traveller.Citizenship" : req.body.Citizenship,
 								"traveller.Document" : req.body.Document,
-								"traveller.Citizenship" : req.body.Citizenship
+								"traveller.DocumentNumber" : req.body.DocumentNumber.toString()
 				}]
 			}, function(result) {
 			
