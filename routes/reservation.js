@@ -22,11 +22,6 @@ var randHex = function() {
 	return pad(randHex, 12);
 }
 
-exports.add = function(req, res) {
-
-  // TODO: make this function add the reservations in here.
-};
-
 exports.all = function(req, res) {
 
   database.getAll(res.app.locals.db, 'reservations', function(result) {
@@ -88,13 +83,25 @@ exports.get = function(req, res) {
 exports.get = {
 
 	doc : function(req, res) {
-	
-		var data = JSON.parse(req.params.data);
-		console.log("[get.doc]: got information: " + data.doc);
-		database.findAll(res.app.locals.db, 'reservations', {"traveller.Document":data.doc}, function(result) {
+
+		var query;
+
+		if (req.body.num && req.body.type && req.body.country) {
+
+			database.findAll(res.app.locals.db, 'reservations', {
+				$and:[{	"traveller.DocumentNumber" : req.body.num,
+								"traveller.Document" : req.body.type,
+								"traveller.Citizenship" : req.body.country
+				}]
+			}, function(result) {
 			
-			res.send(result);
-		});
+				console.log(result);
+				res.send(result);
+			});
+		} else {
+		
+			res.sendStatus(400);
+		}
 	},
 	id : function(req, res) {
 	
@@ -123,7 +130,7 @@ exports.postAdd = function(req, res) {
 				done = true;
 			} else {
 			
-				console.log("[postAdd]: Found a collision! Redoing.");
+				console.log("[postAdd]: Found a match! Redoing.");
 			}
 		});
 	} while (done === true);
