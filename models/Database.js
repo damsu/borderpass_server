@@ -56,7 +56,7 @@ exports.findOne = function(db, coll, data, callback) {
 			
 				throw err;
 			} else {
-			
+				
 				callback([result]);
 			}
 		})
