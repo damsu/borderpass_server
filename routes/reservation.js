@@ -84,8 +84,6 @@ exports.get = {
 
 	doc : function(req, res) {
 
-		var query;
-
 		if (req.body.DocumentNumber && req.body.Document && req.body.Citizenship) {
 
 			database.findAll(res.app.locals.db, 'reservations', {
@@ -110,7 +108,7 @@ exports.get = {
 		var id = new ObjectId(data);
 		database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
 				
-			res.send(result);
+			res.send([]);
 		});
 	}
 }
