@@ -86,12 +86,12 @@ exports.get = {
 
 		var query;
 
-		if (req.body.num && req.body.type && req.body.country) {
+		if (req.body.DocumentNumber && req.body.Document && req.body.Citizenship) {
 
 			database.findAll(res.app.locals.db, 'reservations', {
-				$and:[{	"traveller.DocumentNumber" : req.body.num,
-								"traveller.Document" : req.body.type,
-								"traveller.Citizenship" : req.body.country
+				$and:[{	"traveller.DocumentNumber" : req.body.DocumentNumber.toString(),
+								"traveller.Document" : req.body.Document,
+								"traveller.Citizenship" : req.body.Citizenship
 				}]
 			}, function(result) {
 			
@@ -100,7 +100,7 @@ exports.get = {
 			});
 		} else {
 		
-			res.sendStatus(400);
+			res.send([]);
 		}
 	},
 	id : function(req, res) {
