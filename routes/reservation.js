@@ -108,7 +108,7 @@ exports.get = {
 		var id = new ObjectId(data);
 		database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
 				
-			res.send([]);
+			res.send(result);
 		});
 	}
 }
