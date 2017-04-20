@@ -179,8 +179,9 @@ exports.update = function(req, res) {
 
 	database.update(res.app.locals.db, 'reservations', {_id: id}, data, function(result) {
 
-		if (result) {
+		if (result.result.ok === 1) {
 
+			//console.log(result);
 			res.sendStatus(200);
 		} else {
 
