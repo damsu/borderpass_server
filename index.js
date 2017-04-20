@@ -72,6 +72,7 @@ app.get('/reservations/dummy', rt_reserve.dummy);
 app.get('/reservations', rt_reserve.all);
 app.post('/reservations/docNum', rt_reserve.get.doc);
 app.get('/reservations/id/:data', rt_reserve.get.id);
+app.put('/reservations/id/:id', rt_reserve.update);
 app.delete('/reservations/:id', rt_reserve.delete);
 app.post('/reservations', rt_reserve.postAdd);
 

@@ -14,7 +14,7 @@ exports.create = function(db, coll, callback) {
 exports.getAll = function(db, coll, callback) {
 	db.collection(coll, function(err, collection) {
 		collection.find().toArray(function(err, result) {
-    
+
 			if (err) {
 
 				throw err;
@@ -68,6 +68,20 @@ exports.remove = function(db, coll, data, callback) {
 		
 			if (err) {
 
+				throw err;
+			} else {
+			
+				callback(result);
+			}
+		});
+	});
+}
+exports.update = function(db, coll, query, data, callback) {
+	db.collection(coll, function(err, collection) {
+		collection.update(query, data, function(err, result) {
+		
+			if (err) {
+			
 				throw err;
 			} else {
 			

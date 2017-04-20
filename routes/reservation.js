@@ -15,8 +15,9 @@ var pad = function(number, size) {
 }
 var randHex = function() {
 
-	var d = (new Date).getTime() % 86400000;
-	var randHex = Math.floor(Math.random() * d).toString(16) + Math.floor(Math.random() * 16777216).toString(16);
+	var d = (new Date).getTime() % 86400000; // 86,400,000 milliseconds in a day :)
+	var randHex = Math.floor(Math.random() * d).toString(16)
+									+ Math.floor(Math.random() * 16777216).toString(16);
 	//console.log("[randHex]: " + d.toString(16));
 	//console.log("[randHex]: " + randHex);
 	return pad(randHex, 12);
@@ -138,7 +139,11 @@ exports.postAdd = function(req, res) {
 	
 	var crossing = req.body.crossing;
 	var traveller = req.body.traveller;
-	var vehicle = req.body.vehicle
+	var vehicle = req.body.vehicle;
+
+	var crossing_time = req.body.crossing.Time;
+	var crossing_date = new Date(req.body.crossing.Date);
+	var crossing_address = req.body.crossing.Address;
 	
 	database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
 	
@@ -167,3 +172,19 @@ exports.delete = function(req, res) {
 		}
 	})
 }
+exports.update = function(req, res) {
+
+	var id = new ObjectId(req.params.id);
+	var data = req.body;
+
+	database.update(res.app.locals.db, 'reservations', {_id: id}, data, function(result) {
+
+		if (result) {
+
+			res.sendStatus(200);
+		} else {
+
+			res.send([]);
+		}
+	});
+} 
