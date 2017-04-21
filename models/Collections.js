@@ -17,8 +17,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_city: 'Imatra',			to_city: 'Svetogorsk',	address: 'Imatra',
 		from_flag_url: 'fi.png',	to_flag_url: 'ru.png',
 		short_name_from: 'fi',		short_name_to: 'ru',
-		service_provider: 'Finnish Transport Agency',
-		timeslots: {}
+		service_provider: 'Finnish Transport Agency'
 	};
    var crossings_2 = {
 		from_country: 'Finland',	to_country: 'Russia',
@@ -26,7 +25,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'fi.png',	to_flag_url: 'ru.png',
 		short_name_from: 'fi',		short_name_to: 'ru',
 		service_provider: 'Finnish Transport Agency',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_3 = {
 		from_country: 'Finland',	to_country: 'Russia',
@@ -34,7 +33,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'fi.png',	to_flag_url: 'ru.png',
 		short_name_from: 'fi',		short_name_to: 'ru',
 		service_provider: 'Finnish Transport Agency',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_4 = {
 		from_country: 'Russia',		to_country: 'Finland',
@@ -42,7 +41,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'ru.png',	to_flag_url: 'fi.png',
 		short_name_from: 'ru',		short_name_to: 'fi',
 		service_provider: 'Border Service of the Federal Security Service of the Russian Federation',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_5 = {
 		from_country: 'Russia',		to_country: 'Finland',
@@ -50,7 +49,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'ru.png',	to_flag_url: 'fi.png',
 		short_name_from: 'ru',		short_name_to: 'fi',
 		service_provider: 'Border Service of the Federal Security Service of the Russian Federation',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_6 = {
 		from_country: 'Russia',		to_country: 'Finland',
@@ -58,7 +57,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'ru.png',	to_flag_url: 'fi.png',
 		short_name_from: 'ru',		short_name_to: 'fi',
 		service_provider: 'Border Service of the Federal Security Service of the Russian Federation',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_7 = {
 		from_country: 'Russia',		to_country: 'Norway',
@@ -66,7 +65,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'ru.png',	to_flag_url: 'no.png',
 		short_name_from: 'ru',		short_name_to: 'no',
 		service_provider: 'Border Service of the Federal Security Service of the Russian Federation',
-		timeslots: {}
+		timeslots: []
 	};
 	var crossings_8 = {
 		from_country: 'Norway',		to_country: 'Russia',
@@ -74,7 +73,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_flag_url: 'no.png',	to_flag_url: 'ru.png',
 		short_name_from: 'no',		short_name_to: 'ru',
 		service_provider: 'Norwegian Customs Se',
-		timeslots: {}
+		timeslots: []
 	};
 
 	//Replace them into collection

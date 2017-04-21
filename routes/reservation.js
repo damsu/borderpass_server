@@ -13,9 +13,9 @@ var pad = function(number, size) {
 	var s = "00000" + number;
 	return s.substr(s.length - size);
 }
-var randNum = function() {
+var randNum = function() {	// NOTE! This shit is NOT random at all!
+														// Pseudo randomness for glory I guess...
 
-	// TODO: Make this function do a 24 byte long number instead of 12 byte long hex
 	var d = pad((new Date).getTime() % 999999, 6) // 6 bytes long time in milliseconds
 	
 	var randNums = new Array();
@@ -79,12 +79,19 @@ exports.get = {
 	},
 	id : function(req, res) {
 	
-		var data = req.params.data;
-		var id = new ObjectId(data);
-		database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
+		try {
+		
+			var data = req.params.data;
+			var id = new ObjectId(data);
+			database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
 				
-			res.send((result[0]) ? result : []);
-		});
+				res.send((result[0]) ? result : []);
+			});
+		} catch(err) {
+		
+			//console.log(err);
+			res.sendStatus([]);
+		}
 	}
 }
 exports.postAdd = function(req, res) {
@@ -114,19 +121,33 @@ exports.postAdd = function(req, res) {
 	var crossing = req.body.crossing;
 	var traveller = req.body.traveller;
 	var vehicle = req.body.vehicle;
-/*
-	var crossing_time = req.body.crossing.Time;
-	var crossing_date = req.body.crossing.Date;
-	var crossing_address = req.body.crossing.Address;
-*/
-	database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
-	
-		if (result.ops[0]._id) {
 
-			res.send(result.ops[0]._id);
-		} else {
+	var crossing_date = "timeslots." + crossing.Date;
+	var crossing_time = crossing.Time;
+	var crossing_address = crossing.Address;
+	
+	var timeslot =
+	{
+		$addToSet: {
+			[crossing_date]: crossing_time
+		}
+	};
+		
+	database.update(res.app.locals.db, 'crossings', {address: crossing_address}, timeslot, function(result) {
+		if (result.result.nModified == 1) {
+
+			database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
+				if (result.ops[0]._id) {
+					res.send(result.ops[0]._id);
+				} else {
 			
-			res.send(result);
+					res.send(result);
+				}
+			});
+		}
+		else {
+				
+			res.send("NO RESERVATION SAVED!");
 		}
 	});
 }
