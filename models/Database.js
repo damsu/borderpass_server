@@ -27,7 +27,6 @@ exports.getAll = function(db, coll, callback) {
 }
 exports.postData = function(db, coll, data, callback) {
 	db.collection(coll, function(err, collection) {
-
 		collection.insert(data, function(err, result) {
 
 			(err) ? callback(err) : callback(result);

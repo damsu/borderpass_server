@@ -36,10 +36,6 @@ mongo.connect(MONGO_URL, function(err, db) {
   app.locals.db = db;
 });
 
-// Testing variables.
-var varfoo = 'foo';
-var varbar = 'bar';
-
 // Setting up the port
 app.set('port', (process.env.PORT || 8100));
 
@@ -52,10 +48,12 @@ app.get('/', rt_main.index);
 
 // OK, this shit actually works!
 //app.get('/test', rt_main.test);
+/*
 app.get('/test1', rt_main.test.test1(varfoo));
 app.get('/test2', rt_main.test.test2(varbar));
 
 app.post('/test1', rt_main.test.post.test1);
+*/
 
 //app.get('/cross/:loc', rt_main.cross);
 //app.get('/collections', rt_collec.list);
@@ -71,12 +69,14 @@ app.get('/reservations/init', rt_reserve.init);
 app.get('/reservations/dummy', rt_reserve.dummy);
 app.get('/reservations', rt_reserve.all);
 app.post('/reservations/docNum', rt_reserve.get.doc);
+
 app.get('/reservations/id/:data', rt_reserve.get.id);
 app.put('/reservations/id/:id', rt_reserve.update);
-app.delete('/reservations/:id', rt_reserve.delete);
+app.delete('/reservations/id/:id', rt_reserve.delete);
 app.post('/reservations', rt_reserve.postAdd);
 
-// Listening to a port
+// Listening to a port. This either listens to the localhost port 8100
+// or the port gotten from heroku.
 app.listen(app.get('port'), function() {
 
   console.log('Node application is running in port ' + app.get('port'));

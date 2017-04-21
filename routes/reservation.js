@@ -10,17 +10,21 @@ var ObjectId = require('mongodb').ObjectId;
 
 var pad = function(number, size) {
 
-	var s = "00000000000" + number;
+	var s = "00000" + number;
 	return s.substr(s.length - size);
 }
-var randHex = function() {
+var randNum = function() {
 
-	var d = (new Date).getTime() % 86400000; // 86,400,000 milliseconds in a day :)
-	var randHex = Math.floor(Math.random() * d).toString(16)
-									+ Math.floor(Math.random() * 16777216).toString(16);
-	//console.log("[randHex]: " + d.toString(16));
-	//console.log("[randHex]: " + randHex);
-	return pad(randHex, 12);
+	// TODO: Make this function do a 24 byte long number instead of 12 byte long hex
+	var d = pad((new Date).getTime() % 999999, 6) // 6 bytes long time in milliseconds
+	
+	var randNums = new Array();
+	for (i = 0; i < 3; i++) {
+		
+		randNums[i] = pad(Math.floor(Math.random() * 1000000), 6); // from 000000 to 999999
+	}
+	console.log("[randNums]: " + d + randNums[0] + randNums[1] + randNums[2]);
+	return (d + randNums[0] + randNums[1] + randNums[2]);
 }
 
 exports.all = function(req, res) {
@@ -51,36 +55,6 @@ exports.dummy = function(req, res) {
     res.sendStatus(200);
   });
 }
-/*
-exports.get = function(req, res) {
-
-	var type = req.params.type;
-	var data = req.params.data;
-
-	switch (type) {
-	
-		case 'docNum':
-
-			database.findAll(res.app.locals.db, 'reservations', {"traveller.DocumentNumber" : data}, function(result) {
-			
-				res.send(result);
-			});
-			break;
-		case 'id':
-
-			var id = new ObjectId(data);
-			database.findOne(res.app.locals.db, 'reservations', {_id: id}, function(result) {
-				
-				res.send(result);
-			});
-			break;
-		default:
-
-			res.sendStatus(404);
-			break;
-	}
-}
-*/
 exports.get = {
 
 	doc : function(req, res) {
@@ -122,14 +96,14 @@ exports.postAdd = function(req, res) {
 	var done = false;
 	do {
 	
-		newId = new ObjectId(randHex().toString());
+		newId = new ObjectId(randNum().toString());
 		database.findOne(res.app.locals.db, 'reservations', {_id: newId}, function(result) {
 
-			if (result == null) {
+			if (result[0] === null) {
 
 				done = true;
 			} else {
-			
+
 				console.log("[postAdd]: Found a match! Redoing.");
 			}
 		});
@@ -140,11 +114,11 @@ exports.postAdd = function(req, res) {
 	var crossing = req.body.crossing;
 	var traveller = req.body.traveller;
 	var vehicle = req.body.vehicle;
-
+/*
 	var crossing_time = req.body.crossing.Time;
-	var crossing_date = new Date(req.body.crossing.Date);
+	var crossing_date = req.body.crossing.Date;
 	var crossing_address = req.body.crossing.Address;
-	
+*/
 	database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
 	
 		if (result.ops[0]._id) {
