@@ -1,5 +1,5 @@
 ![Borderpass](/img/icon-bp.png)
-#### server
+### S E R V E R
 
 ---
 
@@ -25,12 +25,21 @@ The server routing would go as follows:
 **Returns:** Every border crossing saved to the database.
 
 ---
+## Getting reservation data
 
 | type | route | sent data |
 | :-- | :-- | :-- |
-| GET | /reservations/:type/:data | **type**: what document look for, **data**: data on the field |
+| POST | /reservations/docNum | **Object** |
+**Object format:**
+``` json
+{
+	"Document": ">>document type<<",
+	"DocumentNumber": ">>document number<<",
+	"Citizenship": ">>EN/FI/RU/GR etc...<<"
+}
+```
 
-**Returns:** All the matching data from the query. (404 if type is undefined)
+**Returns:** All the matching data from the query in reverse order. (Returns an empty array if nothing is found.)
 
 ---
 
