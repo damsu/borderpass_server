@@ -148,7 +148,7 @@ exports.postAdd = function(req, res) {
 		}
 		else {
 				
-			res.send("NO RESERVATION SAVED!");
+			res.send("TIMESLOT ALREADY TAKEN!");
 		}
 	});
 }
