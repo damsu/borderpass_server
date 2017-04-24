@@ -137,13 +137,29 @@ exports.postAdd = function(req, res) {
 	database.update(res.app.locals.db, 'crossings', {address: crossing_address}, timeslot, function(result) {
 		if (result.result.nModified == 1) {
 
-			database.postData(res.app.locals.db, 'reservations', {_id: newId, crossing, traveller, vehicle}, function(result) {
-				if (result.ops[0]._id) {
-					res.send(result.ops[0]._id);
-				} else {
+			var crossing_desc, crossing_flag;
+			database.findOne(res.app.locals.db, 'crossings', {address: crossing_address}, function(result) {
+				
+				console.log(JSON.stringify(result[0]));
+				crossing_desc = result[0].service_provider;
+				crossing_flag = result[0].from_flag_url;
+
+				database.postData(res.app.locals.db, 'reservations',
+				{
+					_id: newId,
+					crossing,
+					traveller,
+					vehicle,
+					"service_provider": crossing_desc,
+					"flag": crossing_flag
+				}, function(result) {
+					if (result.ops[0]._id) {
+						res.send(result.ops[0]._id);
+					} else {
 			
-					res.send(result);
-				}
+						res.send(result);
+					}
+				});
 			});
 		}
 		else {
