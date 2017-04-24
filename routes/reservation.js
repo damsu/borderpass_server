@@ -2,10 +2,10 @@
 
    Routes for reservations.
 */
-var collections = require('../models/Collections.js');
-var database = require('../models/Database.js');
-var reservation = require('../models/Reservation.js');
-var crossings = require('../models/Crossings.js');
+const collections = require('../models/Collections.js');
+const database = require('../models/Database.js');
+const reservation = require('../models/Reservation.js');
+const crossings = require('../models/Crossings.js');
 var ObjectId = require('mongodb').ObjectId;
 
 var pad = function(number, size) {
@@ -39,7 +39,7 @@ exports.all = function(req, res) {
 // Create the reservations collection
 exports.init = function(req, res) {
 
-  database.create(req.app.locals.db, 'reservations', function(coll) {
+  database.create(req.res.app.locals.db, 'reservations', function(coll) {
     
     console.log("created collection : ", coll);
     res.send("Collection creation succesful!");
@@ -61,11 +61,12 @@ exports.get = {
 
 		if (req.body.DocumentNumber && req.body.Document && req.body.Citizenship) {
 
-			database.findAll(res.app.locals.db, 'reservations', {
+			database.findAll(res.app.locals.db, 'reservations',
+			{
 				$and:[{
-								"traveller.Citizenship" : req.body.Citizenship,
-								"traveller.Document" : req.body.Document,
-								"traveller.DocumentNumber" : req.body.DocumentNumber.toString()
+					"traveller.Citizenship" : req.body.Citizenship,
+					"traveller.Document" : req.body.Document,
+					"traveller.DocumentNumber" : req.body.DocumentNumber.toString()
 				}]
 			}, function(result) {
 			

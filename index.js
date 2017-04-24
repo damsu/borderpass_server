@@ -7,14 +7,13 @@
 // Node module imports
 const express = require('express');
 const cors = require('cors');
-const Q = require('q');
 const MONGO_URL = (process.env.MONGODB_URI) ? process.env.MONGODB_URI : 'mongodb://localhost:27017/borderpass';
-var bodyParser = require('body-parser');
-var mongo = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
+const mongo = require('mongodb').MongoClient;
 
 // Model Imports
-var collections = require('./models/Collections.js');
-var crossings = require('./models/Crossings.js');
+const collections = require('./models/Collections.js');
+const crossings = require('./models/Crossings.js');
 
 // Route Imports
 const rt_main = require('./routes');
