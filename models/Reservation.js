@@ -13,22 +13,19 @@ var dummyData = [
 	}
 ];
 
-exports.addDummyData = function(dbref, callback) {
+exports.clearData = function(dbref, callback) {
 
-  // TODO: Add dummy data insertion. 
   dbref.collection('reservations', function(err, reserve_coll) {
-  
-    reserve_coll.remove({});
-    reserve_coll.insert(dummyData, function(err, result) {
+    reserve_coll.remove({}, function(err, result) {
+		
+			if (err) {
+			
+				throw err;
+			} else {
 
-      if (err) {
-      
-        throw err;
-      } else {
-      
-        callback(result);
-      }
-    });
+				callback(result);
+			}
+		});
   });
 };
 exports.getAll = function(dbref, callback) {

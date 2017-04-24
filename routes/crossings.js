@@ -49,7 +49,6 @@ exports.init =  function(req, res) {
 
   collections.create(req.app.locals.db, "crossings", function(coll) {
     
-    console.log("created collection : ", coll);
     collections.addCrossings(req.app.locals.db, function(result) {
       
       console.log("inserted into crossings : ", result);

@@ -46,7 +46,7 @@ exports.init = function(req, res) {
 // Dummy data route for the reservations.
 exports.dummy = function(req, res) {
 
-  reservation.addDummyData(res.app.locals.db, function(result) {
+  reservation.clearData(res.app.locals.db, function(result) {
   
     res.sendStatus(200);
   });
