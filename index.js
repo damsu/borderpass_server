@@ -45,34 +45,26 @@ app.use(bodyParser.json());
 // Base route
 app.get('/', rt_main.index);
 
-// OK, this shit actually works!
-//app.get('/test', rt_main.test);
-/*
-app.get('/test1', rt_main.test.test1(varfoo));
-app.get('/test2', rt_main.test.test2(varbar));
-
-app.post('/test1', rt_main.test.post.test1);
-*/
-
-//app.get('/cross/:loc', rt_main.cross);
-//app.get('/collections', rt_collec.list);
-//app.get('/collections/:name', rt_collec.find);
 app.get('/borders', rt_cross.all);
 app.get('/borders/:id', rt_cross.one);
-app.delete('/borders/:id', rt_cross.delete);
-app.get('/init', rt_cross.init);
+app.get('/borders/init', rt_cross.init);
+
 app.post('/crossings', rt_cross.add)
+
+app.delete('/borders/:id', rt_cross.delete);
 
 // Reservation routes.
 app.get('/reservations/init', rt_reserve.init);
 app.get('/reservations/dummy', rt_reserve.dummy);
 app.get('/reservations', rt_reserve.all);
+app.get('/reservations/id/:data', rt_reserve.get.id);
+
+app.put('/reservations/id/:id', rt_reserve.update);
+
+app.post('/reservations', rt_reserve.postAdd);
 app.post('/reservations/docNum', rt_reserve.get.doc);
 
-app.get('/reservations/id/:data', rt_reserve.get.id);
-app.put('/reservations/id/:id', rt_reserve.update);
 app.delete('/reservations/id/:id', rt_reserve.delete);
-app.post('/reservations', rt_reserve.postAdd);
 
 // Listening to a port. This either listens to the localhost port 8100
 // or the port gotten from heroku.

@@ -66,7 +66,7 @@ exports.addCrossings = function(dbref, callback) {
 		from_city: 'Storskog',     to_city: 'Borisoglebsky',address: 'Storskog',
 		from_flag_url: 'no.png',	to_flag_url: 'ru.png',
 		short_name_from: 'no',		short_name_to: 'ru',
-		service_provider: 'Norwegian Customs Se'
+		service_provider: 'Norwegian Customs Service'
 	};
 
 	//Replace them into collection

@@ -67,11 +67,11 @@ exports.get = {
 					"traveller.Citizenship" : req.body.Citizenship,
 					"traveller.Document" : req.body.Document,
 					"traveller.DocumentNumber" : req.body.DocumentNumber.toString()
-				}]
+				}] 
 			}, function(result) {
 			
 				console.log(result);
-				res.send(result);
+				res.send(result.reverse());
 			});
 		} else {
 		
