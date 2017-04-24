@@ -47,7 +47,7 @@ app.get('/', rt_main.index);
 
 app.get('/borders', rt_cross.all);
 app.get('/borders/:id', rt_cross.one);
-app.get('/borders/init', rt_cross.init);
+app.get('/border/init', rt_cross.init);
 
 app.post('/crossings', rt_cross.add)
 
