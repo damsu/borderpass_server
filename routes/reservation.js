@@ -140,7 +140,6 @@ exports.postAdd = function(req, res) {
 			var crossing_desc, crossing_flag;
 			database.findOne(res.app.locals.db, 'crossings', {address: crossing_address}, function(result) {
 				
-				console.log(JSON.stringify(result[0]));
 				crossing_desc = result[0].service_provider;
 				crossing_flag = result[0].from_flag_url;
 
