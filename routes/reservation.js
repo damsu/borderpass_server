@@ -23,7 +23,6 @@ var randNum = function() {	// NOTE! This shit is NOT random at all!
 		
 		randNums[i] = pad(Math.floor(Math.random() * 1000000), 6); // from 000000 to 999999
 	}
-	console.log("[randNums]: " + d + randNums[0] + randNums[1] + randNums[2]);
 	return (d + randNums[0] + randNums[1] + randNums[2]);
 }
 
@@ -31,7 +30,6 @@ exports.all = function(req, res) {
 
   database.getAll(res.app.locals.db, 'reservations', function(result) {
   
-    console.log('all data fetched from the server');
     res.json(result);
   });
 }
@@ -41,7 +39,6 @@ exports.init = function(req, res) {
 
   database.create(req.res.app.locals.db, 'reservations', function(coll) {
     
-    console.log("created collection : ", coll);
     res.send("Collection creation succesful!");
   });
 };
@@ -51,7 +48,6 @@ exports.dummy = function(req, res) {
 
   reservation.addDummyData(res.app.locals.db, function(result) {
   
-    console.log('inserted collections data: ' + result);
     res.sendStatus(200);
   });
 }
@@ -117,8 +113,6 @@ exports.postAdd = function(req, res) {
 		});
 	} while (done === true);
 
-	console.log("[postAdd]: newId " + newId);
-	
 	var crossing = req.body.crossing;
 	var traveller = req.body.traveller;
 	var vehicle = req.body.vehicle;
@@ -126,15 +120,13 @@ exports.postAdd = function(req, res) {
 	var crossing_date = "timeslots." + crossing.Date;
 	var crossing_time = crossing.Time;
 	var crossing_address = crossing.Address;
-	
-	var timeslot =
+		
+	database.update(res.app.locals.db, 'crossings', {address: crossing_address},
 	{
 		$addToSet: {
 			[crossing_date]: crossing_time
 		}
-	};
-		
-	database.update(res.app.locals.db, 'crossings', {address: crossing_address}, timeslot, function(result) {
+	}, function(result) {
 		if (result.result.nModified == 1) {
 
 			var crossing_desc, crossing_flag;
