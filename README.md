@@ -7,6 +7,8 @@
 
 * [About](#about)
 * [Routing](#routing)
+  * [Getting reservation data](#getting-reservation-data)
+  * [Adding new reservations](#adding-new-reservations)
 * [Adding more routes](#adding-more-routes)
   * [index.js](#indexjs)
   * [routes/foo.js](#routesfoojs)
@@ -27,46 +29,53 @@ The server routing would go as follows:
 ---
 ## Getting reservation data
 
+### By document number:
 | type | route | sent data |
 | :-- | :-- | :-- |
 | POST | /reservations/docNum | **Object** |
 **Object format:**
 ``` json
 {
-	"Document": ">>document type<<",
-	"DocumentNumber": ">>document number<<",
-	"Citizenship": ">>EN/FI/RU/GR etc...<<"
+	"Document": "<document type>",
+	"DocumentNumber": "<document number>",
+	"Citizenship": "<EN/FI/RU/GR etc...>"
 }
 ```
 
 **Returns:** All the matching data from the query in reverse order. (Returns an empty array if nothing is found.)
 
----
+### By document ID:
+| type | route | sent data |
+| :-- | :-- | :-- |
+| GET | /reservations/id/**:id** | **id** of the reservation |
+**Returns:** The reservation matching the id parameter of the route.
 
+---
+## Adding new reservations
 | type | route | sent data |
 | :-- | :-- | :-- |
 | POST | /reservations/ | **reservation_form** |
 
-**Returns:** The ObjectId of the inserted data.
+**Returns:** The ObjectId of the inserted data.  
+**reservation_form format:**  
+*(the server is interested in the following data)*
+``` json
+{
+	"crossing": {
+		"Time":"<hh:mm>",
+		"Date":"<date_string>",
+		"Address":"<crossing_address>"
+	},
+	"traveller": {
+		"Document":"<document_type>",
+		"DocumentNumber":"<document_number>",
+		"Citizenship":"<EN/FI/RU/GR etc...>"
+	}
+}
+```
+*NOTE:* These are the BARE MINIMUM required data to make the reservtion through. There is way more data that is filled in the clientside.
 
 ---
-
-| type | route | sent data |
-| :-- | :-- | :-- |
-| DELETE | reservations/:id | **reservationID** |
-
-**Returns:** Status 200  
-*TODO:* Make this work only for the person who had put the reservation in in the first place...
-
----
-
-Some restrictions to specific routes
-
-| route | restriction |
-| :-- | :-- |
-| /admin/.* | Only system administrators can access this route and its subroutes. |
-
-*NOTE:* This is more or less depcreated.
 
 # Adding more routes
 Creating more routes for the server requires two parts:   
