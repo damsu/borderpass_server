@@ -37,12 +37,34 @@ exports.delete = function(req, res) {
 
 // POST route for adding a crossing
 exports.add = function(req, res) {
-  
-  crossings.addCrossing(req.app.locals.db, req.body, function(result) {
 
+  data.push({"timeslots": new Array()});
+  var data = req.body;
+  
+  crossings.addCrossing(req.app.locals.db, data, function(result) {
     res.send("Sucessfully added a crossing");
   });
+
 };
+
+// PUT route for editing a crossing
+exports.update = function(req, res) {
+  
+    var id = new ObjectId(req.params.id);
+    var data = req.body;
+  
+    database.update(res.app.locals.db, 'crossings', {_id: id}, data, function(result) {
+  
+      if (result.result.ok === 1) {
+  
+        //console.log(result);
+        res.sendStatus(200);
+      } else {
+  
+        res.send([]);
+      }
+    });
+  } 
 
 // Create the crossings collection and insert dummy data to it.
 exports.init =  function(req, res) {

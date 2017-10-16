@@ -49,6 +49,8 @@ app.get('/borders', rt_cross.all);
 app.get('/borders/:id', rt_cross.one);
 app.get('/border/init', rt_cross.init);
 
+app.put('/crossings/:id', rt_cross.update);
+
 app.post('/crossings', rt_cross.add)
 
 app.delete('/borders/:id', rt_cross.delete);
