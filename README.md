@@ -9,6 +9,10 @@
 * [Routing](#routing)
   * [Getting reservation data](#getting-reservation-data)
   * [Adding new reservations](#adding-new-reservations)
+  * [Getting all borders](#adding-new-reservations)
+  * [Getting specified border](#adding-new-reservations)
+  * [Adding new border](#adding-new-reservations)
+  * [Updating existing border](#adding-new-reservations)
 * [Adding more routes](#adding-more-routes)
   * [index.js](#indexjs)
   * [routes/foo.js](#routesfoojs)
@@ -51,30 +55,90 @@ The server routing would go as follows:
 **Returns:** The reservation matching the id parameter of the route.
 
 ---
-## Adding new reservations
+## Getting all borders
 | type | route | sent data |
 | :-- | :-- | :-- |
-| POST | /reservations/ | **reservation_form** |
+| POST | /borders/ | **empty** |
 
-**Returns:** The ObjectId of the inserted data.  
+**Returns:** Array of added borders  
+
+---
+
+## Getting specified border
+| type | route | sent data |
+| :-- | :-- | :-- |
+| POST | /borders/:id | **id of the border** |
+
+**Returns:** Border with specified id. 
+
+---
+## Getting reservation data
+
+| type | route | sent data |
+| :-- | :-- | :-- |
+| POST | /reservations/docNum | **Object** |
+**Object format:**
+``` json
+{
+	"Document": "<document type>",
+	"DocumentNumber": "<document number>",
+	"Citizenship": "<EN/FI/RU/GR etc...>"
+}
+```
+
+**Returns:** All the matching data from the query in reverse order. (Returns an empty array if nothing is found.)
+
+---
+## Adding new border
+| type | route | sent data |
+| :-- | :-- | :-- |
+| POST | /crossings/ | **crossing_form** |
+
+**Returns:** 200 OK
 **reservation_form format:**  
 *(the server is interested in the following data)*
 ``` json
 {
-	"crossing": {
-		"Time":"<hh:mm>",
-		"Date":"<date_string>",
-		"Address":"<crossing_address>"
-	},
-	"traveller": {
-		"Document":"<document_type>",
-		"DocumentNumber":"<document_number>",
-		"Citizenship":"<EN/FI/RU/GR etc...>"
+	{
+		"from_country":"<string>",
+		"to_country":"<string>",
+		"from_city":"<string>"
+		"to_city":"<string>",
+		"address":"<string>",
+		"from_flag_url":"<string>"
+		"to_flag_url":"<string>",
+		"short_name_from":"<string>",
+		"short_name_to":"<string>"
+		"service_provider":"<string>"
 	}
 }
 ```
-*NOTE:* These are the BARE MINIMUM required data to make the reservtion through. There is way more data that is filled in the clientside.
 
+---
+## Updating existing border
+| type | route | sent data |
+| :-- | :-- | :-- |
+| POST | /crossings/:id | **id (in URL) + crossing_form** |
+
+**Returns:** 200 OK
+**reservation_form format:**  
+*(the server is interested in the following data)*
+``` json
+{
+	{
+		"from_country":"<string>",
+		"to_country":"<string>",
+		"from_city":"<string>"
+		"to_city":"<string>",
+		"address":"<string>",
+		"from_flag_url":"<string>"
+		"to_flag_url":"<string>",
+		"short_name_from":"<string>",
+		"short_name_to":"<string>"
+		"service_provider":"<string>"
+	}
+}
+```
 ---
 
 # Adding more routes
