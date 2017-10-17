@@ -53,7 +53,7 @@ exports.update = function(req, res) {
     var id = new ObjectId(req.params.id);
     var data = req.body;
   
-    crossings.update(req.app.locals.db, 'crossings', {_id: id}, data, function(result) {
+    crossings.updateOne({_id: id}, {$set: data}, function(result) {
   
       if (result.result.ok === 1) {
   
