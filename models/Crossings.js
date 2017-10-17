@@ -39,7 +39,9 @@ exports.deleteOne = function(dbref, crossing_id, callback){
 //Add a new crossing
 exports.addCrossing = function(dbref, crossing, callback){
 	// retrieve a collection reference
+	console.log(crossing);
 	dbref.collection('crossings', function(err, crossings_collection) { 
+		console.log(crossings_collection);
 		crossings_collection.insert(crossing, function (err, result) {
 		  if (err) {
 		    console.log(err);

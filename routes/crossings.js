@@ -39,6 +39,7 @@ exports.delete = function(req, res) {
 exports.add = function(req, res) {
 
   var data = req.body.data;
+  console.log(req.body)
   data.push({"timeslots": new Array()});
   
   crossings.addCrossing(req.app.locals.db, data, function(result) {
