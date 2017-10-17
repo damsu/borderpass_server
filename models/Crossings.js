@@ -49,3 +49,19 @@ exports.addCrossing = function(dbref, crossing, callback){
 		})
 	})
 }
+
+//Update a new crossing
+exports.updateCrossing = function(db, coll, query, data, callback) {
+	db.collection('crossings', function(err, collection) {
+		collection.update(query, data, function(err, result) {
+		
+			if (err) {
+			
+				throw err;
+			} else {
+			
+				callback(result);
+			}
+		});
+	});
+}
