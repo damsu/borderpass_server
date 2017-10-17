@@ -38,7 +38,7 @@ exports.delete = function(req, res) {
 // POST route for adding a crossing
 exports.add = function(req, res) {
 
-  var data = req.body.data:;
+  var data = req.body.data;
   data.push({"timeslots": new Array()});
   var data = req.body;
   
