@@ -53,11 +53,10 @@ exports.update = function(req, res) {
     var id = new ObjectId(req.params.id);
     var data = req.body;
   
-    crossings.update(res.app.locals.db, 'crossings', {_id: id}, data, function(result) {
+    crossings.update(req.app.locals.db, 'crossings', {_id: id}, data, function(result) {
   
       if (result.result.ok === 1) {
   
-        //console.log(result);
         res.sendStatus(200);
       } else {
   
