@@ -42,7 +42,7 @@ exports.add = function(req, res) {
   data["timeslots"] = new Array();
   
   crossings.addCrossing(req.app.locals.db, data, function(result) {
-    res.send("Sucessfully added a crossing");
+    res.sendStatus(200);
   });
 
 };
