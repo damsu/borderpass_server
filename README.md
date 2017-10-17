@@ -118,7 +118,7 @@ The server routing would go as follows:
 ## Updating existing border
 | type | route | sent data |
 | :-- | :-- | :-- |
-| POST | /crossings/:id | **crossing_form** |
+| POST | /crossings/:id | **id (in URL) + crossing_form** |
 
 **Returns:** 200 OK
 **reservation_form format:**  
