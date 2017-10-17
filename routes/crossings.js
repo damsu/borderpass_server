@@ -40,7 +40,6 @@ exports.add = function(req, res) {
 
   var data = req.body.data;
   data.push({"timeslots": new Array()});
-  var data = req.body;
   
   crossings.addCrossing(req.app.locals.db, data, function(result) {
     res.send("Sucessfully added a crossing");
