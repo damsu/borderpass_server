@@ -102,13 +102,13 @@ The server routing would go as follows:
 	{
 		"from_country":"<string>",
 		"to_country":"<string>",
-		"from_city":"<string>"
+		"from_city":"<string>",
 		"to_city":"<string>",
 		"address":"<string>",
-		"from_flag_url":"<string>"
+		"from_flag_url":"<string>",
 		"to_flag_url":"<string>",
 		"short_name_from":"<string>",
-		"short_name_to":"<string>"
+		"short_name_to":"<string>",
 		"service_provider":"<string>"
 	}
 }
@@ -128,13 +128,13 @@ The server routing would go as follows:
 	{
 		"from_country":"<string>",
 		"to_country":"<string>",
-		"from_city":"<string>"
+		"from_city":"<string>",
 		"to_city":"<string>",
 		"address":"<string>",
-		"from_flag_url":"<string>"
+		"from_flag_url":"<string>",
 		"to_flag_url":"<string>",
 		"short_name_from":"<string>",
-		"short_name_to":"<string>"
+		"short_name_to":"<string>",
 		"service_provider":"<string>"
 	}
 }
