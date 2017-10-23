@@ -98,7 +98,6 @@ The server routing would go as follows:
 **reservation_form format:**  
 *(the server is interested in the following data)*
 ``` json
-{
 	{
 		"from_country":"<string>",
 		"to_country":"<string>",
@@ -111,7 +110,6 @@ The server routing would go as follows:
 		"short_name_to":"<string>",
 		"service_provider":"<string>"
 	}
-}
 ```
 
 ---
@@ -124,7 +122,6 @@ The server routing would go as follows:
 **reservation_form format:**  
 *(the server is interested in the following data)*
 ``` json
-{
 	{
 		"from_country":"<string>",
 		"to_country":"<string>",
@@ -137,7 +134,6 @@ The server routing would go as follows:
 		"short_name_to":"<string>",
 		"service_provider":"<string>"
 	}
-}
 ```
 ---
 
