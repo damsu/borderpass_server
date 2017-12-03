@@ -89,7 +89,6 @@ exports.get = {
 			});
 		} catch(err) {
 		
-			//console.log(err);
 			res.sendStatus(404);
 		}
 	}
