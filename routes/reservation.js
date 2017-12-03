@@ -67,11 +67,14 @@ exports.get = {
 			}, function(result) {
 			
 				console.log(result);
+				if(result.length == 0){
+
+				}
 				res.send(result.reverse());
 			});
 		} else {
 		
-			res.send([]);
+			res.sendStatus(404);
 		}
 	},
 	id : function(req, res) {
@@ -87,7 +90,7 @@ exports.get = {
 		} catch(err) {
 		
 			//console.log(err);
-			res.sendStatus([]);
+			res.sendStatus(404);
 		}
 	}
 }
